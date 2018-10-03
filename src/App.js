@@ -1,12 +1,24 @@
 import React, { Component } from 'react';
 import './App.css';
 import Form from './components/Form';
+import Recipes from './components/recipes';
+
+const API_KEY = 'acb62f7c712ee2f2404924d294b352c0';
 
 class App extends Component {
-  getRecipe = (e) => {
+  state = {
+    recipes: []
+  }
+  getRecipe = async (e) => {
+    const recipeName = e.target.elements.recipeName.value;
     e.preventDefault();
-    const recipeName = e.target.elements.recipeName.value
-    console.log(recipeName);
+    const api_call =  await fetch (`https://cors-anywhere.herokuapp.com/http://food2fork.com/api/search?key=${API_KEY}&q=${recipeName}&count=10`);
+    const data = await api_call.json() ; 
+
+    this.setState(
+      {recipes: data.recipes}
+    );
+    console.log(this.state.recipes);
   }
 
   render() {
@@ -16,6 +28,7 @@ class App extends Component {
           <h1 className= "App-title">Recipe Search</h1>
         </header>
         <Form getRecipe = {this.getRecipe} />
+       <Recipes recipes = {this.state.recipes}/> 
       </div>
     );
   }
