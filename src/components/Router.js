@@ -1,13 +1,15 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import App from '../App'; 
-import Recipe from './Recipe'
+import welcome from'./welcome'
+import App from '../App'
+import donate from './donate'
 
 const Router = () => (
     <BrowserRouter>
         <Switch>
             <Route exact path = '/' component = {App} />
-            <Route path= '/recipe/:id' component = {Recipe}/> 
+            <Route path='/givemefood' component = {welcome}/>
+            <Route path ='/donate' component = {donate}/>
         </Switch>
     </BrowserRouter>
 );

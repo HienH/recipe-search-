@@ -1,34 +1,31 @@
 import React, { Component } from 'react';
-import './App.css';
-import Form from './components/Form';
-import Recipes from './components/recipes';
-
-const API_KEY = 'acb62f7c712ee2f2404924d294b352c0';
+import './App.css';  
+import {Link} from 'react-router-dom';
 
 class App extends Component {
-  state = {
-    recipes: []
-  }
-  getRecipe = async (e) => {
-    const recipeName = e.target.elements.recipeName.value;
-    e.preventDefault();
-    const api_call =  await fetch (`https://cors-anywhere.herokuapp.com/http://food2fork.com/api/search?key=${API_KEY}&q=${recipeName}&count=10`);
-    const data = await api_call.json() ; 
-
-    this.setState(
-      {recipes: data.recipes}
-    );
-    console.log(this.state.recipes);
-  }
-
-  render() {
+render() {
     return (
-      <div className = "App">
+      <div className = "welcome">
         <header className= "App-header">
-          <h1 className= "App-title">Recipe Search</h1>
+          <h1 className= "App-title">FREE FOOD</h1>
         </header>
-        <Form getRecipe = {this.getRecipe} />
-       <Recipes recipes = {this.state.recipes}/> 
+        <p>
+          Are you a 
+        </p>
+        <button class="btn btn-outline-warning btn-lg">
+          <Link to ={{
+            pathname: `/givemefood`,
+            //state: {recipe: recipe.title}
+          }}>RECEIEVER</Link>
+        </button>
+
+        <button type="button" class="btn btn-outline-success btn-lg">
+        <Link to ={{
+            pathname: `/donate`,
+            //state: {recipe: recipe.title}
+          }}>GIVER</Link>
+          </button>
+
       </div>
     );
   }
